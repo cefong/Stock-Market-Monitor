@@ -1,3 +1,3 @@
 public class PickShareFunctional {
-    findHighPriced(Shares.symbols.stream());
+    // findHighPriced(Shares.symbols.stream())
 }

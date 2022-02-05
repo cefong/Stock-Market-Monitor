@@ -1,5 +1,6 @@
 import java.math.BigDecimal;
 
+// to store information on each share
 public class ShareInfo {
     public final String symbol;
     public final BigDecimal price;
