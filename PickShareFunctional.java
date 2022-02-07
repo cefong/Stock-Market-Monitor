@@ -16,7 +16,14 @@ public class PickShareFunctional {
         shares.stream().forEach(System.out::println);
 
         // First filtering the list to find the Shares with prices below 500 and then finding the max price in the list
-        Optional<ShareInfo> highestPrice =  shares.stream().filter(x -> ShareUtil.isPriceLessThan(500).test(x)).max((x, y) -> x.price.compareTo(y.price));
+        Optional<ShareInfo> highestPrice =  shares.stream().filter(x -> {
+            try {
+                return ShareUtil.isPriceLessThan(500).test(x);
+            } catch (Exception e) {
+                System.out.println("Exception Thrown: "+ e);
+                return false;
+            }
+            }).max((x, y) -> x.price.compareTo(y.price));
 
         System.out.println("Highest price: " + highestPrice);
         return highestPrice;
