@@ -35,8 +35,8 @@ public class PickShareFunctional {
     }
     public static void main(String[] args) {
         long startTime = System.nanoTime();
-        findHighPriced(Shares.symbols.stream()).toString();
-        // findHighPriced(Shares.symbols.parallelStream()).toString();
+        //findHighPriced(Shares.symbols.stream()).toString();
+        findHighPriced(Shares.symbols.parallelStream()).toString();
         long endTime = System.nanoTime();
 
 
@@ -46,7 +46,7 @@ public class PickShareFunctional {
         System.out.println("Total execution time is: " + duration + "ms");
 
         if (duration > 60000) {
-            System.out.println("Execution time minus time used to wait out API limits is: " + (duration - 60000) + "ms");
+            System.out.println("Execution time minus time used to wait out API limits is: " + (duration%60000) + "ms");
         }
     }
 
