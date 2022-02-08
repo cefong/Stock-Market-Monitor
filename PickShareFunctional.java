@@ -8,8 +8,8 @@ public class PickShareFunctional {
     public static Optional<ShareInfo> findHighPriced(Stream<String> symbols){
         // shares list
         List<ShareInfo> shares = new ArrayList<>();
-
-        //populating shares list with ShareInfo objects
+        
+        // populating shares list with ShareInfo objects
         symbols.forEach(x -> shares.add(ShareUtil.getPrice(x)));
 
         // printing the list of ShareInfo values: symbol and price
@@ -30,7 +30,13 @@ public class PickShareFunctional {
         
     }
     public static void main(String[] args) {
-        System.out.println(findHighPriced(Shares.symbols.stream()).toString());
+        long startTime = System.nanoTime();
+        findHighPriced(Shares.symbols.stream()).toString();
+        long endTime = System.nanoTime();
+
+        long duration = (endTime - startTime) / 1000000;
+
+        System.out.println("Execution time is: " + duration + "ms");
     }
 
 }
