@@ -1,11 +1,12 @@
 import java.util.stream.Stream;
+import java.util.Collection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class PickShareFunctional {
     // findHighPriced function which determines which share has the highest price under 500$ in a functional style
-    public static Optional<ShareInfo> findHighPriced(Stream<String> symbols){
+    public static Optional<ShareInfo> findHighPriced(Stream<String> symbols){   
         // shares list
         List<ShareInfo> shares = new ArrayList<>();
         
@@ -31,10 +32,15 @@ public class PickShareFunctional {
     }
     public static void main(String[] args) {
         long startTime = System.nanoTime();
-        findHighPriced(Shares.symbols.stream()).toString();
+        //findHighPriced(Shares.symbols.stream()).toString();
+        findHighPriced(Shares.symbols.parallelStream()).toString();
         long endTime = System.nanoTime();
 
-        long duration = (endTime - startTime) / 1000000;
+        // how many times did we have to delay?
+        int numDelays = Math.floorDiv(Shares.symbols.size(), 5);
+
+        // edit duration to remove effect of time delay
+        long duration = (endTime - startTime) / 1000000  - numDelays*60000;
 
         System.out.println("Execution time is: " + duration + "ms");
     }
