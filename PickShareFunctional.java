@@ -32,15 +32,13 @@ public class PickShareFunctional {
     }
     public static void main(String[] args) {
         long startTime = System.nanoTime();
-        //findHighPriced(Shares.symbols.stream()).toString();
-        findHighPriced(Shares.symbols.parallelStream()).toString();
+        findHighPriced(Shares.symbols.stream()).toString();
+        //findHighPriced(Shares.symbols.parallelStream()).toString();
         long endTime = System.nanoTime();
 
-        // how many times did we have to delay?
-        int numDelays = Math.floorDiv(Shares.symbols.size(), 5);
 
         // edit duration to remove effect of time delay
-        long duration = (endTime - startTime) / 1000000  - numDelays*60000;
+        long duration = (endTime - startTime) / 1000000;
 
         System.out.println("Execution time is: " + duration + "ms");
     }
