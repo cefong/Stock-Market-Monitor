@@ -11,10 +11,13 @@ public class PickShareFunctional {
         List<ShareInfo> shares = new ArrayList<>();
         
         // populating shares list with ShareInfo objects
-        symbols.forEach(x -> shares.add(ShareUtil.getPrice(x)));
+        symbols.forEach(x -> {
+            shares.add(ShareUtil.getPrice(x));
+            System.out.println("Fetching " + x + " prices from Alpha Vantage API...");
+        });
 
         // printing the list of ShareInfo values: symbol and price
-        shares.stream().forEach(System.out::println);
+        // shares.stream().forEach(System.out::println);
 
         // First filtering the list to find the Shares with prices below 500 and then finding the max price in the list
         Optional<ShareInfo> highestPrice =  shares.stream().filter(x -> {
@@ -33,14 +36,18 @@ public class PickShareFunctional {
     public static void main(String[] args) {
         long startTime = System.nanoTime();
         findHighPriced(Shares.symbols.stream()).toString();
-        //findHighPriced(Shares.symbols.parallelStream()).toString();
+        // findHighPriced(Shares.symbols.parallelStream()).toString();
         long endTime = System.nanoTime();
 
 
         // edit duration to remove effect of time delay
         long duration = (endTime - startTime) / 1000000;
 
-        System.out.println("Execution time is: " + duration + "ms");
+        System.out.println("Total execution time is: " + duration + "ms");
+
+        if (duration > 60000) {
+            System.out.println("Execution time minus time used to wait out API limits is: " + (duration - 60000) + "ms");
+        }
     }
 
 }

@@ -23,7 +23,6 @@ public class APIFinance {
                 // connect to the API
                 URL url = new URL(BASE_URL + "function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=" + key);
                 URLConnection connection = url.openConnection();
-                System.out.println("Request #" + requests + " API key used: " + key + " Symbol requested: " + symbol);
     
                 // read in stock information using a stream
                 InputStreamReader inputStream = new InputStreamReader(connection.getInputStream(), "UTF-8");
@@ -37,7 +36,6 @@ public class APIFinance {
                     if (line.contains("price")) {
                         price = new BigDecimal(line.split("\"")[3].trim());
                     }
-                    System.out.println(line);
                 }
                 // close out the reader
                 bufferedReader.close();
